@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <h1>Beta Test</h1>
+    
+    <% if(typeof error !== 'undefined'){ %>
+      <h2>Error : <%= error %></h2>
+    <% } %>
+    <form method="POST">
+            <input type="text" name="username" placeholder="Enter the username">
+            <input type="password" name="password" placeholder="Enter the password">
+            <input type="text" name="nickname" placeholder="Enter the nickname">
+            <input type="text" name="email" placeholder="Enter the dimi email" pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@dimigo.hs.kr$">
+            <button>Sign Up</button>
+    </form>
+  </body>
+</html>
