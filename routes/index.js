@@ -7,7 +7,6 @@ const dbConnection = require('./db-connection');
 const router = express();
  
 router.use(cookieParser());
-router.use(express.json());
 
 router.get('/', (req,res) => {
     res.send({ greeting:"welcome to waylab CTF" });
