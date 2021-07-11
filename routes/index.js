@@ -1,4 +1,5 @@
 const express = require('express');
+const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
 const dbConnection = require('./db-connection');
 const router = express();
@@ -15,7 +16,8 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { body } = req;
     try {
-        const [data] = await dbConnection.execute("SELECT * FROM users where username = ? and password = ?", [body.username, body.password]);
+        const hash_pass = crypto.createHash("sha256").update(body.password, "binary").digest("hex");
+        const [data] = await dbConnection.execute("SELECT * FROM users where username = ? and password = ?", [body.username, hash_pass]);
         if (data.length < 1) {
             res.render('login.ejs', {error: '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.'});
         } else {
@@ -40,12 +42,14 @@ router.post('/signup', async (req, res) => {
         if (data.length >= 1) {
             res.render('signup.ejs', {error: '사용자가 존재함.'});
         } else{       
-            const [data_] = await dbConnection.execute("INSERT INTO users (username, password, nickname, email) values (?, ?, ?, ?)", [body.username, body.password, body.nickname, body.email]);
+            const hash_pass = crypto.createHash("sha256").update(body.password, "binary").digest("hex");
+            const [data_] = await dbConnection.execute("INSERT INTO users (username, password, nickname, email) values (?, ?, ?, ?)", [body.username, hash_pass, body.nickname, body.email]);
             if (data_.affectedRows !== 1) {
                 res.render('signup.ejs', {error: '가입 실패'});
             } else{ res.redirect("/login"); }
         }
-    }catch{
+    }catch (error){
+        console.log(error);
         res.status(500);
         res.send('500 Server Error');
     }
