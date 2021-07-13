@@ -22,6 +22,6 @@ app.use('/', require('./routes/index.js'));
 
 app.use((req, res) => { err404(req, res); });
 
-app.listen(3000, () => { console.log("Connected !") });
+app.listen(3002, () => { console.log("Connected !") });
 
 function err404(req, res) { res.sendFile('404.html', { root: path.join(__dirname, '/public/html/err') }); }

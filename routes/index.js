@@ -23,11 +23,13 @@ router.post('/login', async (req, res) => {
         if (data.length < 1) {
             res.render('login.ejs', {error: '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.'});
         } else {
-            const token = await jwt.sign({ user: data.username}, SECRET, { expiresIn: '1h'});
-            res.cookie('token', token);
-            res.redirect("/");           
+            if (data[0]['email_verify'] == 1){
+                const token = await jwt.sign({ user: data[0]['username'], verify: data[0]['email_verify']}, SECRET, { expiresIn: '1h'});
+                res.cookie('token', token);
+                res.redirect("/");       
+            } else { res.status(400); res.send("Please verify your email")}
         }
-    }catch{
+    }catch (e) {
         res.status(500);
         res.send('500 Server Error');
     }
@@ -46,7 +48,7 @@ router.post('/signup', async (req, res) => {
         } else{       
             const hash_pass = crypto.createHash("sha256").update(body.password, "binary").digest("hex");
             const token = uuid();
-            const url = `http://localhost:3000/confirm/${token}`;
+            const url = `http://141.164.47.126:3002/confirm/${token}`;
             const [data_] = await dbConnection.execute("INSERT INTO users (username, password, nickname, email, email_verify, token) values (?, ?, ?, ?, ?, ?)", 
                 [body.username, hash_pass, body.nickname, body.email, false, token]
             );
@@ -64,9 +66,24 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.get('/confirm/:token', (req, res) => {
-    res.send(req.params.token);
-})
+router.get('/confirm/:token', async (req, res) => {
+    const token = req.params.token;
+    try{
+        const [data] = await dbConnection.execute("SELECT * FROM users where token = ?", [token]);
+        if (data.length >= 1) {
+            const [verify] = await dbConnection.execute("UPDATE users SET email_verify = 1, token = '' WHERE token = ?",[token]);
+            if (verify.info.indexOf("Changed: 1") != -1){
+                res.redirect('/login');
+            }
+        } else {
+            res.status(400);
+            res.send("bad token");
+        }
+    } catch (err) {
+        res.status(500);
+        res.send('500 Sever Error');
+    }
+});
 
 router.get('/logout', (req, res) => {
     res.clearCookie("token");

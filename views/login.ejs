@@ -6,6 +6,9 @@
   <body>
     <h1>Beta Test</h1>
 
+    <% if(typeof error !== 'undefined'){ %>
+      <h2>Error : <%= error %></h2>
+    <% } %>
     <form method="POST">
             <input type="text" name="username" placeholder="Enter the username">
             <input type="password" name="password" placeholder="Enter the password">
