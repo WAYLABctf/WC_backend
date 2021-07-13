@@ -1,4 +1,4 @@
-const { smtpTransport } = require('../config/email');
+const { smtpTransport } = require('./email');
 
 const MailSend = function(mail, url){ 
     emailTemplete = `<html>

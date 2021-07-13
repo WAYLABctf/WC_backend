@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(cookieParser());
 app.use(cors());
 
-app.use('/', require('./routes/index.js'));
+app.use('/api', require('./server/routes/index.js'));
 
 app.use((req, res) => { err404(req, res); });
 

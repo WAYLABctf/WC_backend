@@ -1,7 +1,7 @@
 module.exports = {
     apps : [{
-        name: "app",
-        script: "./app.js",
+        name: "WC_backend",
+        script: "./server.js",
         env: {
             NODE_ENV: "production",
         },
