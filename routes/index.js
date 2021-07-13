@@ -29,7 +29,8 @@ router.post('/login', async (req, res) => {
                 res.redirect("/");       
             } else { res.status(400); res.send("Please verify your email")}
         }
-    }catch (e) {
+    }catch (error) {
+        console.log(error);
         res.status(500);
         res.send('500 Server Error');
     }
