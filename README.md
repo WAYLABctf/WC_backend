@@ -19,7 +19,9 @@ Currently, The implemented function is a login, signup, logout. ( Need a little 
 ![](https://github.com/WAYLABctf/WC_backend/blob/main/test/First-day-test-3.png?raw=true)
 ![](https://github.com/WAYLABctf/WC_backend/blob/main/test/jwt.png?raw=true)
 
-나는 ID가 2인 `snwo`라는 계정으로 로그인을 했고, jwt가 잘 생성된 것을 볼 수 있다.
+나는 ID가 2인 `snwo`라는 계정으로 로그인을 했고, jwt가 잘 생성된 것을 볼 수 있다. 
+
+(+ 이메일 인증은 비활성화 시켜 놓음)
 
 ---
 ## 플래그 인증
