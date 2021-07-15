@@ -47,7 +47,7 @@ Currently, The implemented function is a login, signup, logout. flag auth functi
 
 ![](https://github.com/WAYLABctf/WC_backend/blob/main/test/challenges-1.png?raw=true) 
 
-모든 문제를 인증하고 challenges 테이블에서 sovler 컬럼 확인
+모든 문제를 인증하고 challenges 테이블에서 sovler 컬럼 확인 (challenges table)
 
 위와 같이 인증 후 DB를 확인해보면 sovler, solved의 값이 잘 들어간 것을 볼 수 있고, users pts(points) 또한 잘 올라간 것을 확인 할 수 있다.
 
