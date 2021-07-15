@@ -11,7 +11,7 @@ Currently, The implemented function is a login, signup, logout. ( Need a little 
 ![](https://github.com/WAYLABctf/WC_backend/blob/main/test/First-day-test-1.png?raw=true)
 ![](https://github.com/WAYLABctf/WC_backend/blob/main/test/First-day-test-2.png?raw=true)
 
-현재는 위와 같이 총 3명의 사용자와 3개의 문제가 들어있다. 사용자 디비에서의 solved 컬럼은 현재 내가 푼 문제의 ID를 저장하는 컬럼이고, 문제 디비에서의 solver 컬럼은 현재 이 문재를 해결한 사람들을 저장하는 컬럼이고, 이는 JSON으로 해결하기로 했다. (By as 3617)
+현재는 위와 같이 총 3명의 사용자와 3개의 문제가 들어있다. 사용자 디비에서의 solved 컬럼은 현재 내가 푼 문제의 ID를 저장하는 컬럼이고, 문제 디비에서의 solver 컬럼은 현재 이 문재를 해결한 사람들을 저장하는 컬럼이고, 이는 JSON으로 해결하기로 했다. (By as3617)
 
 ---
 ## 로그인
