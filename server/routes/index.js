@@ -6,8 +6,13 @@ const { MailSend } = require('./Email-Send.js');
 const dbConnection = require('./db-connection');
 
 const router = express();
+<<<<<<< HEAD
 const SECRET = process.env.JWT_KEY;
 const email_regex  = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@dimigo.hs.kr$/i;  // 디미고 이메일 정규식
+=======
+const SECRET = 'test'; // 임시
+const eamil_regex  = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@dimigo.hs.kr$/i;  // 디미고 이메일 정규식
+>>>>>>> e58f693cfc7f500d541576904c9743e05b8a4de1
 
 router
 .get('/', (req,res) => {
@@ -26,9 +31,21 @@ router
         const hash_pass = crypto.createHash("sha256").update(body.password, "binary").digest("hex");
         const [data] = await dbConnection.execute("SELECT * FROM users where username = ? and password = ?", [body.username, hash_pass]);
         if (data.length < 1) { // 사용자 계정 존재 여부 검증.
+<<<<<<< HEAD
             [data_] = await dbConnection.execute("SELECT * FROM users WHERE username=?", [body.username]);
             if(data_.length < 1) { res.send('not_registered'); }
             else { res.send('wrong_password'); }
+=======
+            res.send('Not registered account or wrong password');
+            [data_] = await dbConnection.execute("SELECT * FROM users WHERE username=?", [body.username]);
+            if(data_.length < 1) {
+                res.status(302);
+                res.send('not_registered');
+            } else {
+                res.status(302);
+                res.send('wrong_password');
+            }
+>>>>>>> e58f693cfc7f500d541576904c9743e05b8a4de1
         } else {
             if (data[0]['email_verify'] == 1){ // 사용자 계정 인증 검증.
                 const token = await jwt.sign({ user: data[0]['username'], verify: data[0]['email_verify']}, SECRET, { expiresIn: '1h'});
@@ -159,7 +176,11 @@ router
                 if (check){
                     pts = user[0].pts + challenge[0].pts; // 사용자 점수 + 문제 점수
                     J_solved.solved.push(challenge[0].id); // 사용자가 푼 문제 + 현재 푼 문제
+<<<<<<< HEAD
                     const [auth_flag_users] = await dbConnection.execute("UPDATE users SET pts = ?, solved = ? , auth_time = NOW() WHERE username = ?", [pts, , JSON.stringify(J_solved), user[0].username]); // 사용자가 문제를 풀었을 때, 점수와 사용자가 해결한 문제를 업데이터 함.
+=======
+                    const [auth_flag_users] = await dbConnection.execute("UPDATE users SET pts = ?, solved = ? WHERE username = ?", [pts, , JSON.stringify(J_solved), user[0].username]); // 사용자가 문제를 풀었을 때, 점수와 사용자가 해결한 문제를 업데이터 함.
+>>>>>>> e58f693cfc7f500d541576904c9743e05b8a4de1
                 
                     J_solver = JSON.parse(challenge[0].solver) 
                     J_solver.solver.push(user[0].id) // 문제를 해결한 모든 사용자 정리
@@ -179,6 +200,7 @@ router
     }
 })
 
+<<<<<<< HEAD
 .get('/get-info', async (req, res) => {
     try {
         if(req.cookies['token'] !== undefined) {
@@ -221,3 +243,6 @@ router
 });
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> e58f693cfc7f500d541576904c9743e05b8a4de1
