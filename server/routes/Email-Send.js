@@ -4,9 +4,9 @@ const MailSend = function(mail, url){
     emailTemplete = `<html>
 <body>
   <div>
-    <p style='color:black'>회원 가입을 위한 인증번호 입니다.</p>
-    <p style='color:black'>아래의 인증 번호를 입력하여 인증을 완료해주세요.</p>
-    <h2>${url}</h2>
+    <p style='color:black'>회원 가입을 위한 링크 입니다.</p>
+    <p style='color:black'>아래의 링크를 클릭 해 인증을 완료해주세요.</p>
+    <a href="${url}">인증하기</a>
   </div>
 </body>
 </html>

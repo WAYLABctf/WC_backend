@@ -20,7 +20,7 @@ app.use(cors());
 
 app.use('/api', require('./server/routes/index.js'));
 
-app.use((req, res) => { err404(req, res); });
+app.use((req, res) => { res.redirect("http://waylab.kr") });
 
 app.listen(3002, () => { console.log("Connected !") });
 

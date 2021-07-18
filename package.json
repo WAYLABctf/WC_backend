@@ -19,6 +19,7 @@
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.6.2",
+    "nodemailer-juice": "^1.0.1",
     "uuidv4": "^6.2.11"
   }
 }
